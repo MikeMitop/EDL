@@ -238,33 +238,24 @@ if __name__ == '__main__':
 
 ### Descripción del Programa
 
-Este programa implementa una solución recursiva en Python para extraer de una pila todos los elementos iguales a un dato especificado. Los elementos extraídos se almacenan en una cola, manteniendo el orden original de llegada de dichos elementos. Al finalizar, se muestran por consola:
-- La cola con los elementos extraídos.
-- El número total de elementos extraídos.
-- La pila resultante luego del proceso de extracción.
+Este programa en Python elimina todas las ocurrencias de un número específico de una **cola**, y las coloca en una **cola auxiliar**. Los elementos que no coinciden con el número a eliminar se mantienen en la **cola original**. Al final, el programa imprime la **cola original** después de la eliminación, los **elementos eliminados** en la **cola auxiliar** y el **número total de eliminaciones**.
 
 ### Funcionamiento del Programa
 
-1. **Inicialización de Estructuras:**  
-   Se crea una pila (utilizando una lista) y se llena con 10 valores aleatorios (entre 0 y 9).  
-   Se crea también una cola (utilizando `deque` del módulo `collections`) para almacenar los elementos extraídos.
+1. **Generación de la Cola Original:**
+   Se genera una cola con **30 elementos aleatorios** entre 0 y 9, con algunos números repetidos.
 
-2. **Selección del Elemento a Eliminar:**  
-   Se selecciona aleatoriamente un número que se desea eliminar de la pila.
+2. **Selección del Número a Eliminar:**
+   El programa selecciona un número aleatorio (entre 0 y 9) que se eliminará de la cola original.
 
-3. **Proceso Recursivo de Eliminación:**  
-   La función `eliminar_repetidos` realiza lo siguiente:  
-   - Si la pila está vacía, imprime la cola con los elementos extraídos, el contador y la pila resultante.  
-   - Extrae el elemento superior de la pila.
-     - Si el elemento es igual al dato a eliminar, lo agrega a la cola y aumenta el contador.
-     - Si el elemento es distinto, llama recursivamente a la función sin modificar el contador, y posteriormente restaura el elemento en la pila.
-   - La función se llama recursivamente para procesar todos los elementos de la pila.
+3. **Eliminación de Ocurrencias:**
+   El programa recorre la cola y elimina todas las ocurrencias del número seleccionado. Estos elementos eliminados se agregan a una cola auxiliar.
 
-4. **Resultados:**  
-   Al finalizar la recursión, se muestran los resultados:  
-   - Los elementos que coincidieron con el dato se almacenan en la cola.
-   - El total de elementos extraídos.
-   - La pila se muestra con los elementos que no se eliminaron.
+4. **Resultados:**
+   Al final, el programa imprime:
+   - La **cola original** con los elementos restantes después de eliminar el número.
+   - La **cola auxiliar** con los elementos eliminados.
+   - El **número total de eliminaciones**.
 
 ### Código Fuente
 
@@ -272,50 +263,28 @@ Este programa implementa una solución recursiva en Python para extraer de una p
 import random
 from collections import deque
 
-def eliminar_repetidos(pila, cola, dato, contador):
-    # Caso base: si la pila está vacía, imprimir resultados y retornar el contador
-    if not pila:
-        print("Elementos extraídos (cola):", list(cola))
-        print("Número total de elementos extraídos:", contador)
-        print("Pila después del proceso:", pila)
-        return contador
+def eliminar_repetidos(cola, dato):
+    # Cola auxiliar para almacenar los elementos eliminados
+    cola_aux = deque()
 
-    # Extraer el elemento superior de la pila
-    elemento = pila.pop()
+    # Iteramos sobre los elementos de la cola original
+    # Y eliminamos las ocurrencias del dato especificado
+    contador = 0
+    size = len(cola)
 
-    if elemento == dato:
-        # Si el elemento es igual al dato, se agrega a la cola y se incrementa el contador
-        cola.append(elemento)
-        contador += 1
-    else:
-        # Si el elemento no es igual, se llama recursivamente sin modificar la pila
-        contador = eliminar_repetidos(pila, cola, dato, contador)
-        # Se restaura el elemento no extraído a la pila
-        pila.append(elemento)
-        return contador
+    for _ in range(size):
+        elemento = cola.popleft()  # Sacamos el primer elemento de la cola
 
-    # Llamada recursiva para procesar el resto de la pila
-    contador = eliminar_repetidos(pila, cola, dato, contador)
-    return contador
+        if elemento == dato:
+            cola_aux.append(elemento)  # Si es igual al dato, lo añadimos a la cola auxiliar
+            contador += 1
+        else:
+            cola.append(elemento)  # Si no es igual al dato, lo devolvemos a la cola original
+
+    # Imprimir el resultado
+    print("Cola después de eliminar", dato, ":", list(cola))
+    print("Elementos extraídos (cola):", list(cola_aux))
+    print("Número total de elementos extraídos:", contador)
 
 def main():
-    # Crear una pila representada como lista y una cola usando deque
-    pila = []
-    cola = deque()
-    
-    # Llenar la pila con 10 números aleatorios entre 0 y 9
-    for _ in range(10):
-        pila.append(random.randint(0, 9))
-    
-    print("Pila original:", pila)
-    
-    # Seleccionar un número aleatorio a eliminar
-    dato = random.randint(0, 9)
-    print("Número a eliminar:", dato)
-    
-    # Ejecutar la función de eliminación
-    eliminar_repetidos(pila, cola, dato, 0)
-
-if __name__ == '__main__':
-    main()
-
+    # Crear una cola original re
