@@ -9,6 +9,9 @@ El método append() agrega el auto al final de la vía, simulando el ingreso por
 append() significa: añadir un elemento al final de una estructura.
 
 
+self. -  permite acceder a los atributos y métodos del mismo objeto desde dentro de su clase.
+
+
 
 *El método popleft() elimina el primer auto que ingresó, el que está más cerca del extremo norte.
 
