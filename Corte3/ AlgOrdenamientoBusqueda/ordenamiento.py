@@ -23,18 +23,15 @@ def mostrar_datos(lista):
     for producto in lista:
         print(producto)
 
-def insertion_sort(lista):
-    for i in range(1, len(lista)):
-        key = lista[i]
-        j = i - 1
-        # Mover elementos de lista[0..i-1], que son mayores que key.codigo, a una posición adelante
-        while j >= 0 and lista[j].codigo > key.codigo:
-            lista[j + 1] = lista[j]
-            j -= 1
-        lista[j + 1] = key
+def bubble_sort(lista):
+    n = len(lista)
+    for i in range(n):
+        for j in range(0, n - i - 1):
+            if lista[j].codigo > lista[j + 1].codigo:
+                lista[j], lista[j + 1] = lista[j + 1], lista[j]
 
 def suma_ventas(lista_entrada, lista_salida):
-    insertion_sort(lista_entrada)  # Ordenamos usando insertion sort
+    bubble_sort(lista_entrada)  # Ordenamos usando bubble sort
 
     if not lista_entrada:
         return
