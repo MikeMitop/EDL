@@ -37,7 +37,10 @@ def suma_ventas(lista_entrada, lista_salida):
     for producto_actual in lista_ordenada[1:]:
         if producto_actual.codigo == ultimo_producto.codigo:
             nuevo_count = ultimo_producto.count + 1
-            nuevo_precio = round((ultimo_producto.precio * ultimo_producto.count + producto_actual.precio) / nuevo_count, 2)
+            nuevo_precio = round(
+                (ultimo_producto.precio * ultimo_producto.count + producto_actual.precio)
+                / nuevo_count, 2
+            )
             ultimo_producto = Producto(
                 ultimo_producto.codigo,
                 ultimo_producto.cantidad + producto_actual.cantidad,
@@ -49,10 +52,11 @@ def suma_ventas(lista_entrada, lista_salida):
             ultimo_producto = producto_actual
 
     lista_salida.append(ultimo_producto)
+    lista_entrada.clear()
 
 
 if __name__ == "__main__":
-    print("Ejercicio #1 Lista Productos Vendidos Totalizada")
+    print("Lista Productos Vendidos Totalizada")
     print("=" * 50)
 
     ventas = []
@@ -60,12 +64,12 @@ if __name__ == "__main__":
 
     poblar_datos(ventas, 15)
 
-    print("\nDatos de ventas originales:")
+    print("\nDatos  originales:")
     print("-" * 50)
     mostrar_datos(ventas)
 
     suma_ventas(ventas, totalizadas)
 
-    print("\nDatos de ventas totalizadas por producto:")
+    print("\nDatos de ventas totales por producto:")
     print("-" * 50)
     mostrar_datos(totalizadas)
