@@ -10,7 +10,6 @@ class Producto:
     def __str__(self):
         return f"Código: {self.codigo:4d} | Cantidad: {self.cantidad:3d} | Precio: {self.precio:6.2f}"
 
-
 def poblar_datos(lista, n):
     for _ in range(n):
         producto = Producto(
@@ -20,21 +19,29 @@ def poblar_datos(lista, n):
         )
         lista.append(producto)
 
-
 def mostrar_datos(lista):
     for producto in lista:
         print(producto)
 
+def insertion_sort(lista):
+    for i in range(1, len(lista)):
+        key = lista[i]
+        j = i - 1
+        # Mover elementos de lista[0..i-1], que son mayores que key.codigo, a una posición adelante
+        while j >= 0 and lista[j].codigo > key.codigo:
+            lista[j + 1] = lista[j]
+            j -= 1
+        lista[j + 1] = key
 
 def suma_ventas(lista_entrada, lista_salida):
-    lista_ordenada = sorted(lista_entrada, key=lambda p: p.codigo)
+    insertion_sort(lista_entrada)  # Ordenamos usando insertion sort
 
-    if not lista_ordenada:
+    if not lista_entrada:
         return
 
-    ultimo_producto = lista_ordenada[0]
+    ultimo_producto = lista_entrada[0]
 
-    for producto_actual in lista_ordenada[1:]:
+    for producto_actual in lista_entrada[1:]:
         if producto_actual.codigo == ultimo_producto.codigo:
             nuevo_count = ultimo_producto.count + 1
             nuevo_precio = round(
@@ -53,7 +60,6 @@ def suma_ventas(lista_entrada, lista_salida):
 
     lista_salida.append(ultimo_producto)
     lista_entrada.clear()
-
 
 if __name__ == "__main__":
     print("Lista Productos Vendidos Totalizada")
