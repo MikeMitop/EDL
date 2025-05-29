@@ -31,7 +31,7 @@ def bubble_sort(lista):
                 lista[j], lista[j + 1] = lista[j + 1], lista[j]
 
 def suma_ventas(lista_entrada, lista_salida):
-    bubble_sort(lista_entrada)  # Ordenamos usando bubble sort
+    bubble_sort(lista_entrada)  
 
     if not lista_entrada:
         return
