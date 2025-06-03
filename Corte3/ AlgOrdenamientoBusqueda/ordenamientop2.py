@@ -1,8 +1,7 @@
 import random
 
 def llenarDatos(ids, nombres, datos, n):
-    lista_nombres = ["Juanita", "Pachita", "Albita", "Pedrito", "Damaris", 
-                     "Juan", "Miguel", "Julian", "Andres", "Diego"]
+    lista_nombres = ["Juanita", "Pachita", "Albita", "Pedrito", "Damaris", "Juan", "Miguel", "Julian", "Andres", "Diego"]
     for k in range(n):
         id_emp = random.randint(1000, 9999)
         nombre = lista_nombres[random.randint(0, len(lista_nombres) - 1)]
